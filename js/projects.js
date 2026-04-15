@@ -42,7 +42,7 @@ const projects = [
     description: `<p>An ongoing hardware-software project to build a fully playable game on a small OLED display driven by an ESP32 microcontroller. The goal is a self-contained handheld device with physical buttons, no phone or computer required.</p>
                   <p>The game is a pixel-art side-scrolling runner — a dinosaur dodges cacti and birds with a double-jump mechanic, while scroll speed increases over time to ramp up difficulty. The aesthetic is designed around the constraints of a monochrome OLED: high-contrast sprites drawn pixel-by-pixel, a dark background, and minimal UI.</p>
                   <p>The web version (built in vanilla JavaScript on a canvas) serves as a development sandbox for tuning gameplay feel — physics, spawn timing, collision — before porting the logic to C++ for the Arduino firmware running on the ESP32.</p>`,
-    tags:        ["ESP32", "C++", "JavaScript"],
+    tags:        ["ESP32"],
     images:      [],
     liveUrl:     "",
     githubUrl:   "",
