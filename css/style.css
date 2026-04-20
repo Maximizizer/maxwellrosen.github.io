@@ -730,14 +730,18 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
 /* Modal image gallery */
 .modal-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 8px;
   margin-bottom: 24px;
 }
 
+.modal-gallery figure {
+  margin: 0;
+}
+
 .modal-gallery img {
   width: 100%;
-  aspect-ratio: 4/3;
+  height: 110px;
   object-fit: cover;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
