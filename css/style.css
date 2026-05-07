@@ -839,9 +839,11 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+.modal-links:not(:empty) {
   padding-top: 20px;
   border-top: 1px solid var(--border);
-  margin-bottom: 0;
+  margin-bottom: 20px;
 }
 
 
