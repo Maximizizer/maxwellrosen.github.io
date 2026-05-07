@@ -38,10 +38,10 @@ const projects = [
   },
   {
     title:       "ESP32 OLED Mini-Game",
-    subtitle:    "Pixel-art dino runner built for a microcontroller — work in progress",
-    description: `<p>An ongoing hardware-software project to build a fully playable game on a small OLED display driven by an ESP32 microcontroller. The goal is a self-contained handheld device with physical buttons, no phone or computer required.</p>
+    subtitle:    "Pixel-art dino runner built for a microcontroller",
+    description: `<p>A completed hardware-software project: a fully playable game running on a small OLED display driven by an ESP32 microcontroller. The result is a self-contained handheld device with physical buttons — no phone or computer required.</p>
                   <p>The game is a pixel-art side-scrolling runner — a dinosaur dodges cacti and birds with a double-jump mechanic, while scroll speed increases over time to ramp up difficulty. The aesthetic is designed around the constraints of a monochrome OLED: high-contrast sprites drawn pixel-by-pixel, a dark background, and minimal UI.</p>
-                  <p>The web version (built in vanilla JavaScript on a canvas) serves as a development sandbox for tuning gameplay feel — physics, spawn timing, collision — before porting the logic to C++ for the Arduino firmware running on the ESP32.</p>`,
+                  <p>A web version (built in vanilla JavaScript on a canvas) was used as a development sandbox for tuning gameplay feel — physics, spawn timing, collision — before porting the logic to C++ for the Arduino firmware running on the ESP32.</p>`,
     tags:        ["ESP32"],
     images:      [
       { src: "images/projects/esp32-start-screen.jpg",   caption: "OLED display on startup: 'DINO GAME — Press SPACE to start'" },
