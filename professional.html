@@ -13,12 +13,6 @@
   ║    documents/personal-statement.pdf                          ║
   ║    documents/resume.pdf                                      ║
   ║    documents/cv.pdf                                          ║
-  ║    documents/rec-letter-1.pdf   (first letter)               ║
-  ║    documents/rec-letter-2.pdf   (second letter)              ║
-  ║    documents/rec-letter-3.pdf   (third letter, etc.)         ║
-  ║                                                              ║
-  ║  To add more recommendation letters, copy one of the         ║
-  ║  .rec-item blocks below and update the data-file attribute.  ║
   ╚══════════════════════════════════════════════════════════════╝
   -->
   <title>Professional — Maxwell Rosen</title>
@@ -218,28 +212,6 @@
 
     </div><!-- /doc-grid -->
 
-    <hr class="divider">
-
-
-    <!-- ═══════════════════════════════════════════
-         LETTERS OF RECOMMENDATION
-         ═══════════════════════════════════════════ -->
-    <div class="section-header">
-      <div>
-        <p class="section-label">References</p>
-        <h2 class="section-title">Letters of Recommendation</h2>
-      </div>
-    </div>
-
-    <div class="rec-list">
-
-      <!-- Placeholder — replace with real rec-item blocks when letters are ready -->
-      <div style="padding: 32px 24px; text-align: center; background: var(--bg-alt); border: 1px dashed var(--border); border-radius: var(--radius); color: var(--text-muted); font-size: 0.9rem;">
-        Coming soon
-      </div>
-
-    </div><!-- /rec-list -->
-
   </div><!-- /page -->
 </main>
 
@@ -281,22 +253,6 @@
       setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
     } else {
       btn.textContent = 'Preview';
-    }
-  }
-
-  /* ── Recommendation letter toggle ────────────────────────── */
-  function toggleRec(id, filePath, headerEl) {
-    const panel   = document.getElementById('rec-preview-' + id);
-    const wrap    = document.getElementById('rec-iframe-' + id);
-    const chevron = headerEl.querySelector('.rec-chevron');
-    const isOpen  = panel.classList.contains('open');
-
-    panel.classList.toggle('open');
-    chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
-
-    if (!isOpen && !openPreviews['rec-' + id]) {
-      wrap.innerHTML = buildIframe(filePath);
-      openPreviews['rec-' + id] = true;
     }
   }
 
