@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics Project Plan: ESP32 Dino Runner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        corporate: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            600: '#2b6cb0',
+                            700: '#2c5282',
+                            800: '#2a4365',
+                            900: '#1a365d',
+                        },
+                        charcoal: '#1a202c',
+                        slate: '#4a5568',
+                        accent: '#20B2AA',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8f8f8;
+            color: #333333;
+            scroll-behavior: smooth;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .content-card {
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e2e8f0;
+        }
+
+        h1, h2, h3 {
+            color: #1a202c;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        h2 {
+            border-left: 4px solid #2b6cb0;
+            padding-left: 1rem;
+            margin-top: 3rem !important;
+            margin-bottom: 1.5rem !important;
+        }
+
+        code {
+            background-color: #edf2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9em;
+            color: #2d3748;
+        }
+
+        .formula {
+            font-family: 'Fira Code', monospace;
+            background: #f1f5f9;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-style: italic;
+            color: #2b6cb0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        th {
+            background-color: #f7fafc;
+            text-align: left;
+            padding: 12px 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            color: #4a5568;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            line-height: 1.5;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .contingency-table {
+            border-left: 4px solid #e53e3e;
+        }
+
+        .toc-link {
+            transition: all 0.2s ease;
+        }
+
+        .toc-link:hover {
+            color: #2b6cb0;
+            transform: translateX(4px);
+        }
+
+        @media print {
+            body { background: white; }
+            .no-print { display: none; }
+            .content-card { border: none; box-shadow: none; }
+            h2 { border-left: 2px solid #2b6cb0; }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a0aec0; }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <!-- Header Section -->
+    <header class="pt-16 pb-12 px-6 text-center bg-white border-b border-gray-100">
+        <div class="max-w-4xl mx-auto">
+            <span class="inline-block px-3 py-1 mb-4 text-xs font-bold tracking-widest text-blue-600 uppercase bg-blue-50 rounded-full">
+                Technical Documentation
+            </span>
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-charcoal mb-4">
+                Robotics Project Plan: <span class="text-corporate-600">ESP32 Dino Runner</span>
+            </h1>
+            <p class="text-lg text-slate max-w-2xl mx-auto leading-relaxed">
+                A comprehensive framework for developing a high-performance hardware-software integrated system utilizing the ESP32 ecosystem.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-[850px] mx-auto px-6 py-12">
+        
+        <!-- Table of Contents -->
+        <nav class="content-card rounded-2xl p-8 mb-12 bg-white">
+            <h2 class="text-xl font-bold mt-0! mb-6 flex items-center gap-2 border-none p-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-corporate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                Project Navigation
+            </h2>
+            <ul class="grid md:grid-cols-2 gap-y-3 gap-x-8">
+                <li><a href="#overview" class="toc-link flex items-center text-slate font-medium">1. Project Overview & Objectives</a></li>
+                <li><a href="#specs" class="toc-link flex items-center text-slate font-medium">2. Technical Specifications</a></li>
+                <li><a href="#timeline" class="toc-link flex items-center text-slate font-medium">3. Implementation Phases</a></li>
+                <li><a href="#resources" class="toc-link flex items-center text-slate font-medium">4. Resource Allocation</a></li>
+                <li><a href="#scope" class="toc-link flex items-center text-slate font-medium">5. Project Scope</a></li>
+                <li><a href="#risks" class="toc-link flex items-center text-slate font-medium">6. Contingency Plans</a></li>
+            </ul>
+        </nav>
+
+        <article class="content-card rounded-2xl p-8 md:p-12 mb-12">
+            
+            <!-- 1. Overview -->
+            <section id="overview">
+                <h2 class="text-2xl font-bold mt-0">1. Project Overview & Objectives</h2>
+                <p class="mb-6 leading-relaxed text-slate">
+                    The primary objective of this initiative is to engineer a robust hardware-software integrated system using an <code>ESP32</code> microcontroller and a monochrome OLED display to recreate the iconic Google Chrome "Dino" game.
+                </p>
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="p-4 bg-blue-50 rounded-xl border border-blue-100">
+                        <p class="font-bold text-corporate-800 text-sm mb-1 uppercase tracking-wider">Skill Growth</p>
+                        <p class="text-sm text-slate">Enhance robotics, electrical circuits, and embedded software skills.</p>
+                    </div>
+                    <div class="p-4 bg-teal-50 rounded-xl border border-teal-100">
+                        <p class="font-bold text-teal-800 text-sm mb-1 uppercase tracking-wider">Optimization</p>
+                        <p class="text-sm text-slate">Master hardware constraints including memory and I2C latency.</p>
+                    </div>
+                    <div class="p-4 bg-purple-50 rounded-xl border border-purple-100">
+                        <p class="font-bold text-purple-800 text-sm mb-1 uppercase tracking-wider">Lifecycle</p>
+                        <p class="text-sm text-slate">Navigate the full cycle from procurement to final refinement.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Technical Specifications -->
+            <section id="specs">
+                <h2 class="text-2xl font-bold">2. Technical Specifications</h2>
+                
+                <h3 class="text-lg font-bold text-charcoal mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-accent"></span> Hardware Requirements
+                </h3>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-start gap-3">
+                        <div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-corporate-600 shrink-0"></div>
+                        <span><strong>Microcontroller:</strong> <code>ESP32 DevKit V1</code> (30 or 38 pin) for high clock speed and versatile GPIOs.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-corporate-600 shrink-0"></div>
+                        <span><strong>Display:</strong> 0.96" or 1.3" Monochrome OLED (<code>SSD1306/SH1106</code> driver), 128x64 pixels.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-corporate-600 shrink-0"></div>
+                        <span><strong>Input System:</strong> Tactile momentary push button for jump/restart interactions.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-corporate-600 shrink-0"></div>
+                        <span><strong>Power:</strong> 5V via Micro-USB; optional 3.7V LiPo battery with 3.3V regulation.</span>
+                    </li>
+                </ul>
+
+                <h3 class="text-lg font-bold text-charcoal mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-accent"></span> Software Architecture
+                </h3>
+                <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 space-y-4 mb-8">
+                    <p class="text-sm"><strong>Core Framework:</strong> Developed in <code>C++</code> utilizing the Arduino framework and <code>Wire.h</code> for <code>I2C</code> communication.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white p-3 rounded-lg border border-gray-200">
+                            <span class="text-xs font-bold text-corporate-600 block mb-1">GRAPHICS ENGINE</span>
+                            <code class="text-xs">Adafruit_GFX</code><br>
+                            <code class="text-xs">Adafruit_SSD1306</code>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-gray-200">
+                            <span class="text-xs font-bold text-corporate-600 block mb-1">PHYSICS LOGIC</span>
+                            <span class="formula">v = v + g</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="font-bold text-sm block mb-2">State Machine:</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-white border border-gray-200 rounded text-xs font-mono font-medium text-blue-700">START_MENU</span>
+                            <span class="px-2 py-1 bg-white border border-gray-200 rounded text-xs font-mono font-medium text-green-700">PLAYING</span>
+                            <span class="px-2 py-1 bg-white border border-gray-200 rounded text-xs font-mono font-medium text-red-700">GAME_OVER</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-bold text-charcoal mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-accent"></span> Physical & Performance Constraints
+                </h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    <li class="p-4 rounded-lg border border-slate-100 bg-slate-50 flex flex-col">
+                        <span class="font-bold text-corporate-800 mb-1">Refresh Rate Target</span>
+                        <span class="text-sm">30 FPS (loop execution and I2C transfer < 33ms)</span>
+                    </li>
+                    <li class="p-4 rounded-lg border border-slate-100 bg-slate-50 flex flex-col">
+                        <span class="font-bold text-corporate-800 mb-1">Memory Strategy</span>
+                        <span class="text-sm">Static memory allocation to prevent fragmentation</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- 3. Timeline Table -->
+            <section id="timeline">
+                <h2 class="text-2xl font-bold">3. Implementation Phases (Project Timeline)</h2>
+                <div class="overflow-x-auto rounded-lg mb-8">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="w-1/4">Phase</th>
+                                <th class="w-1/4">Focus</th>
+                                <th class="w-1/2">Key Activities</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="font-bold">Week 1</span></td>
+                                <td>Hardware Integration</td>
+                                <td>Connect ESP32 to OLED; "Hello World" graphics tests; verify button wiring and serial feedback.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="font-bold">Week 2</span></td>
+                                <td>Core Mechanics</td>
+                                <td>Develop Dino sprite movements; implement gravity/jumping physics; ground scrolling parallax.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="font-bold">Week 3</span></td>
+                                <td>Game Logic</td>
+                                <td>Program randomized obstacle generation; code collision detection; real-time score tracking.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="font-bold">Week 4</span></td>
+                                <td>Refinement & UI</td>
+                                <td>Design screens; high-score persistence (<code>ESP32 Preferences</code>); finalize enclosure.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 4. Resources -->
+            <section id="resources">
+                <h2 class="text-2xl font-bold">4. Resource Allocation</h2>
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="space-y-4">
+                        <h3 class="text-md font-bold text-slate uppercase tracking-wide">Human Resources</h3>
+                        <div class="p-4 border border-gray-100 rounded-lg">
+                            <p class="font-bold text-corporate-700">Lead Software Developer</p>
+                            <p class="text-sm text-slate">Core loop, physics, collision, and optimization.</p>
+                        </div>
+                        <div class="p-4 border border-gray-100 rounded-lg">
+                            <p class="font-bold text-corporate-700">Hardware & Systems Engineer</p>
+                            <p class="text-sm text-slate">Circuit design, debouncing, and asset conversion.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-md font-bold text-slate uppercase tracking-wide mb-4">Budget Estimation</h3>
+                        <div class="bg-corporate-900 text-white rounded-xl p-6 shadow-lg relative overflow-hidden">
+                            <div class="relative z-10">
+                                <div class="flex justify-between border-b border-corporate-700 pb-2 mb-2 text-xs opacity-80">
+                                    <span>Item</span>
+                                    <span>Cost</span>
+                                </div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>ESP32 Module</span>
+                                    <span>$5 – $8</span>
+                                </div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>OLED Display</span>
+                                    <span>$3 – $6</span>
+                                </div>
+                                <div class="flex justify-between text-sm mb-4">
+                                    <span>Prototyping Kit</span>
+                                    <span>$5 – $10</span>
+                                </div>
+                                <div class="flex justify-between items-center pt-2 border-t border-corporate-700">
+                                    <span class="font-bold text-corporate-100">Total Est. Cost</span>
+                                    <span class="text-2xl font-bold text-accent">$13 – $24</span>
+                                </div>
+                            </div>
+                            <div class="absolute -right-4 -bottom-4 opacity-10">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Scope -->
+            <section id="scope">
+                <h2 class="text-2xl font-bold">5. Project Scope</h2>
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-emerald-50 p-6 rounded-xl border border-emerald-100">
+                        <h3 class="text-emerald-900 font-bold mb-3 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            In-Scope
+                        </h3>
+                        <ul class="text-sm space-y-2 text-emerald-800">
+                            <li>• 2-frame walking animations</li>
+                            <li>• Randomized cacti obstacles</li>
+                            <li>• Software debouncing for jump</li>
+                            <li>• Dynamic difficulty scaling</li>
+                            <li>• Flash-based high score storage</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-xl border border-gray-200">
+                        <h3 class="text-gray-700 font-bold mb-3 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                            </svg>
+                            Out-of-Scope
+                        </h3>
+                        <ul class="text-sm space-y-2 text-gray-600">
+                            <li>• Multi-level / background changes</li>
+                            <li>• Wi-Fi/Internet leaderboards</li>
+                            <li>• Sound & Music (Optional Stretch)</li>
+                            <li>• Multi-color graphics</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Contingency -->
+            <section id="risks">
+                <h2 class="text-2xl font-bold">6. Contingency Plans (Risk Management)</h2>
+                <div class="overflow-x-auto mb-8">
+                    <table class="contingency-table">
+                        <thead>
+                            <tr>
+                                <th>Potential Risk</th>
+                                <th>Impact</th>
+                                <th>Mitigation Strategy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-bold">I2C Bus Latency</td>
+                                <td><span class="px-2 py-0.5 bg-yellow-100 text-yellow-800 rounded text-xs uppercase font-bold">Medium</span></td>
+                                <td>Increase I2C clock speed to 400kHz via <code>Wire.begin()</code>.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Memory Fragmentation</td>
+                                <td><span class="px-2 py-0.5 bg-red-100 text-red-800 rounded text-xs uppercase font-bold">High</span></td>
+                                <td>Avoid <code>String</code> class and <code>new</code> keywords; use static buffers.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Hardware Damage</td>
+                                <td><span class="px-2 py-0.5 bg-red-100 text-red-800 rounded text-xs uppercase font-bold">Critical</span></td>
+                                <td>Strict "double-check" pinout protocol before USB connection.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">Input Lag</td>
+                                <td><span class="px-2 py-0.5 bg-yellow-100 text-yellow-800 rounded text-xs uppercase font-bold">Medium</span></td>
+                                <td>Utilize Interrupt Service Routines (<code>ISR</code>) or high-frequency polling.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </article>
+    </main>
+
+    <script>
+        // Smooth scroll for anchors
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simple visibility observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = "0";
+            section.style.transform = "translateY(20px)";
+            section.style.transition = "all 0.6s ease-out";
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

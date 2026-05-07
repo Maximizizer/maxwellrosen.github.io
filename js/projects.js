@@ -51,7 +51,9 @@ const projects = [
     ],
     liveUrl:     "",
     githubUrl:   "",
-    extraLinks:  []
+    extraLinks:  [
+      { label: "Project Plan", url: "projects/esp32-dino-runner-plan.html" }
+    ]
   }
 ];
 
